@@ -36,7 +36,7 @@ class CustomBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: unsetWidth ? null : width ?? MediaQuery.of(context).size.width,
-      height: unsetHeight ? null : height ?? 48,
+      height: unsetHeight ? null : height ?? 55,
       child: icon != null
           ? ElevatedButton.icon(
               icon: icon!,
@@ -46,7 +46,7 @@ class CustomBtn extends StatelessWidget {
                     backgroundColor: backgroundColor ?? ColorName.primary,
                     shape: RoundedRectangleBorder(
                         // border radius
-                        borderRadius: BorderRadius.circular(radius ?? 25)),
+                        borderRadius: BorderRadius.circular(radius ?? 15)),
                   ),
               label: CustomText(
                 text: label,
@@ -62,7 +62,7 @@ class CustomBtn extends StatelessWidget {
                     backgroundColor: backgroundColor ?? ColorName.primary,
                     shape: RoundedRectangleBorder(
                         // border radius
-                        borderRadius: BorderRadius.circular(radius ?? 25)),
+                        borderRadius: BorderRadius.circular(radius ?? 15)),
                   ),
               child: CustomText(
                 text: label,

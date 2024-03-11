@@ -46,6 +46,9 @@ dependencies:
   equatable: ^2.0.5
   intl: ^0.19.0
   shared_preferences: ^2.2.2
+  gap: ^3.0.1
+  email_validator: ^2.1.17
+  flutter_progress_hud: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -123,7 +126,7 @@ flutter_icons:
   remove_alpha_ios: true
 
 flutter_native_splash:
-  color: "#42a5f5"
+  color: "#ff3d3d"
 
   # Android 12 handles the splash screen differently than previous versions.  Please visit
   # https://developer.android.com/guide/topics/ui/splash-screen
@@ -139,7 +142,7 @@ flutter_native_splash:
     image: assets/app_icon/ic_launcher.png
 
     # Splash screen background color.
-    color: "#42a5f5"
+    color: "#ff3d3d"
 
     # App icon background color.
     #icon_background_color: "#111111"
