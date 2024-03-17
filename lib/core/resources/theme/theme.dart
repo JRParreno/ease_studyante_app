@@ -7,6 +7,8 @@ import 'package:ease_studyante_app/gen/colors.gen.dart';
 
 abstract class ColorSchemes {
   static const Color seed = Color(0xFF0E0A08);
+  static const Color red = Color(0xFFE72531);
+  static const Color bodyLabel = Color(0xFF494E56);
 
   static const ColorScheme light = ColorScheme(
     brightness: Brightness.light,

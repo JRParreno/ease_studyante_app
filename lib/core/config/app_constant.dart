@@ -24,10 +24,10 @@ class AppConstant {
   //     'Vlf9WqEYICJfsre5v9TtowQYC3RQRiL9r0QuZXGJlTWerCw9XQ9tPB5DCb57d8DYUPOx5ImGToDNJpdPzmJHsvPu23T7OlbEY4V4NqiKclLWgpV1Kebo9GJif5SQuVHw';
   // static const serverUrl = 'http://127.0.0.1:8000';
 
-  static const clientId = 'o46wPJBYRnLUNa44Qa3YxTmglbI44qM0K2R9cxAe';
+  static const clientId = 'Y5N3M1dsDYlmqUKtiumR6aVMtB5GY596pLIEjkyq';
 
   static const clientSecret =
-      'OLGh26iK8sybCiM10WukM8DnbFPWZy1WUJZgJmIrtsDtPrTgyAayvGCPIkEgWo81cpozIEY8AVDGP6nnPzQ0s5Ml7UlFUWuwJY7R3s33mADslisAZuLx5ipUgXCUwpSx';
+      'Jr1eFjDPoItmqgS4pWGbrTd8XNgKOQwEIetlY1VumSc1Ee7R0l3qJrjuioAbNzyULgQ0avshnkwOAcxLO3WWOYmc7kxH8pvVuIezasJGEMzJ55NcdUXdY5Q8R6Ts3sdJ';
 
   static const serverUrl = 'https://smart-library-core.onrender.com';
 

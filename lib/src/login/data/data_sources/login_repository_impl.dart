@@ -14,6 +14,7 @@ class LoginRepositoryImpl extends LoginRepository {
     String url = '${AppConstant.serverUrl}/o/token/';
 
     Map<String, dynamic> data = {
+      'is_student': true,
       'username': email,
       'password': password,
       'grant_type': 'password',
