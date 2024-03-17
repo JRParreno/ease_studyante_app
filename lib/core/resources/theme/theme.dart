@@ -126,7 +126,7 @@ abstract class MaterialAppThemes {
         actionsIconTheme: IconThemeData(color: colorScheme.primary),
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontFamily: 'Poppins',
+          fontFamily: 'JosefinSans',
           fontWeight: FontWeight.bold,
           color: colorScheme.onBackground,
           fontSize: 20,
@@ -147,7 +147,7 @@ abstract class MaterialAppThemes {
         ),
       ),
       visualDensity: VisualDensity.standard,
-      fontFamily: 'Poppins',
+      fontFamily: 'JosefinSans',
       cardTheme: CardTheme(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
@@ -179,7 +179,7 @@ abstract class MaterialAppThemes {
           minimumSize: const Size(134, 54),
           textStyle: const TextStyle(
             fontWeight: FontWeight.normal,
-            fontFamily: 'Poppins',
+            fontFamily: 'JosefinSans',
             fontSize: 18,
           ),
           shape: RoundedRectangleBorder(
@@ -194,7 +194,7 @@ abstract class MaterialAppThemes {
           foregroundColor: colorScheme.onBackground,
           textStyle: const TextStyle(
             fontWeight: FontWeight.normal,
-            fontFamily: 'Poppins',
+            fontFamily: 'JosefinSans',
             fontSize: 18,
           ),
           shape: RoundedRectangleBorder(
@@ -209,7 +209,7 @@ abstract class MaterialAppThemes {
           foregroundColor: colorScheme.primary,
           textStyle: const TextStyle(
             fontSize: 18,
-            fontFamily: 'Poppins',
+            fontFamily: 'JosefinSans',
             fontWeight: FontWeight.w600,
           ),
           shape: RoundedRectangleBorder(
