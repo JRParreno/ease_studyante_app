@@ -117,10 +117,14 @@ class _LoginPageState extends State<LoginPage> {
 
   void handleSubmit() {
     if (_formKey.currentState!.validate()) {
+      // Add student support !widget.args.isTeacher
+      // add checkbox for parent?
+
       loginBloc.add(
         OnSubmitLoginEvent(
           emailAddress: emailCtrl.value.text,
           password: passwordCtrl.value.text,
+          isTeacher: widget.args.isTeacher,
         ),
       );
     }
