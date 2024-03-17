@@ -9,11 +9,19 @@ class LoginRepositoryImpl extends LoginRepository {
   final Dio dio = Dio();
 
   @override
-  Future<LoginResponse> login(
-      {required String email, required String password}) async {
-    String url = '${AppConstant.serverUrl}/o/token/';
+  Future<LoginResponse> login({
+    required String email,
+    required String password,
+    bool isStudent = false,
+    bool isTeacher = false,
+    bool isParent = false,
+  }) async {
+    String url = '${AppConstant.serverUrl}/o/login/';
 
     Map<String, dynamic> data = {
+      'is_teacher': isTeacher,
+      'is_parent': isParent,
+      'is_student': isStudent,
       'username': email,
       'password': password,
       'grant_type': 'password',

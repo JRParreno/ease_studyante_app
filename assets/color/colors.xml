@@ -6,4 +6,5 @@
     <color name="error">#B00020</color>
     <color name="place_holder">#FF494E56</color>
     <color name="border">#FFCED3DD</color>
+    <color name="background">#EAEAEA</color>
 </resources>

@@ -1,4 +1,5 @@
 import 'package:ease_studyante_app/src/landing/presentation/landing_page.dart';
+import 'package:ease_studyante_app/src/teacher/teacher_home.dart';
 import 'package:flutter/material.dart';
 
 import '../../src/forgot_password/forgot_password_page.dart';
@@ -18,6 +19,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           );
         case ForgotPasswordPage.routeName:
           return const ForgotPasswordPage();
+        case TeacherHomePage.routeName:
+          return const TeacherHomePage();
       }
 
       return const Scaffold(
