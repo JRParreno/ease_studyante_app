@@ -1,3 +1,5 @@
+import 'package:ease_studyante_app/src/teacher/bloc/teacher_bloc.dart';
+import 'package:ease_studyante_app/src/teacher/teacher_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -6,7 +8,6 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../core/common_widget/custom_appbar.dart';
-import '../../profile/presentation/bloc/profile_bloc.dart';
 import '../data/data_sources/login_repository_impl.dart';
 import 'bloc/login_bloc.dart';
 import 'widgets/login_footer.dart';
@@ -135,12 +136,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void handleNavigate() {
-    BlocProvider.of<ProfileBloc>(context).add(OnGetProfileEvent());
-    // Navigator.pushAndRemoveUntil<void>(
-    //   context,
-    //   MaterialPageRoute<void>(
-    //       builder: (BuildContext context) => const HomePage()),
-    //   ModalRoute.withName('/'),
-    // );
+    if (widget.args.isTeacher) {
+      BlocProvider.of<TeacherBloc>(context).add(OnGetTeacherProfileEvent());
+
+      Navigator.pushAndRemoveUntil<void>(
+        context,
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) => const TeacherHomePage()),
+        ModalRoute.withName('/'),
+      );
+    }
+
+    // return student view home
   }
 }

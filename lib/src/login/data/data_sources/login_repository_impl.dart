@@ -11,9 +11,10 @@ class LoginRepositoryImpl extends LoginRepository {
   @override
   Future<LoginResponse> login(
       {required String email, required String password}) async {
-    String url = '${AppConstant.serverUrl}/o/token/';
+    String url = '${AppConstant.serverUrl}/o/login/';
 
     Map<String, dynamic> data = {
+      'is_teacher': true,
       'username': email,
       'password': password,
       'grant_type': 'password',
