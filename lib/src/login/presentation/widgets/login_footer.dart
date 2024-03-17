@@ -10,7 +10,7 @@ class LoginFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 25),
+      padding: const EdgeInsets.only(bottom: 15, top: 10),
       child: CustomTextLink(
         style: const TextStyle(
           color: ColorName.placeHolder,
