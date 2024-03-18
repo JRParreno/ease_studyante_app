@@ -19,7 +19,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoading());
 
       final response = await repository.login(
-          email: event.emailAddress, password: event.password);
+        email: event.emailAddress,
+        password: event.password,
+        isParent: event.isParent,
+        isStudent: false,
+        isTeacher: event.isTeacher,
+      );
       await repository.saveTokens(
           accessToken: response.data['access_token'],
           refreshToken: response.data['refresh_token']);
