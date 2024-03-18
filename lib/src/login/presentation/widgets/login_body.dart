@@ -61,7 +61,7 @@ class LoginBody extends StatelessWidget {
                 obscureText: !passwordVisible,
                 suffixIcon: suffixIcon,
               ),
-              const Gap(30),
+              const Gap(10),
               Padding(
                 padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * 0.20,

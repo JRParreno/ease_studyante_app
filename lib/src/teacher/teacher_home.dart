@@ -7,6 +7,7 @@ import 'package:ease_studyante_app/src/landing/presentation/landing_page.dart';
 import 'package:ease_studyante_app/src/teacher/bloc/teacher_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/pages/home/data/data_sources/teacher_schedule_repository_impl.dart';
 import 'package:ease_studyante_app/src/teacher/pages/home/presentation/widgets/teacher_drawer.dart';
+import 'package:ease_studyante_app/src/teacher/pages/qr_code/presentation/teacher_qr_code_scanner.dart';
 import 'package:ease_studyante_app/src/teacher/pages/schedule/presentation/bloc/teacher_schedule_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/pages/schedule/presentation/teacher_schedule_page.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
 
   final pages = [
     const TeacherSchedulePage(),
-    const TeacherSchedulePage(),
+    const TeacherQRCodeScanner(),
     const TeacherSchedulePage(),
   ];
 
