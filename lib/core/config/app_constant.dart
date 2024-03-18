@@ -19,11 +19,12 @@ class AppConstant {
   );
   static const appName = 'EaseStudyante';
 
-  static const clientId = 'Y5N3M1dsDYlmqUKtiumR6aVMtB5GY596pLIEjkyq';
+  static const clientId = 'za0JTqP0o9c6NExKIXDOYTEqvud3uwu35f3raHDV';
   static const clientSecret =
-      'Jr1eFjDPoItmqgS4pWGbrTd8XNgKOQwEIetlY1VumSc1Ee7R0l3qJrjuioAbNzyULgQ0avshnkwOAcxLO3WWOYmc7kxH8pvVuIezasJGEMzJ55NcdUXdY5Q8R6Ts3sdJ';
+      'QuOKuhMhlqoyXkBL2TuhbKlwak2Ic6HpbQc4YqdbIIJIEokRNwcx9sgMa4sLKlf9kFUhpPMnQ8waLpEKNGf4hBVZ9BKTP7wxstef6JiPO1qX2GJjQHdifxEfD0s38UKJ';
   static const serverUrl = 'http://127.0.0.1:8000';
-
+  //za0JTqP0o9c6NExKIXDOYTEqvud3uwu35f3raHDV
+  //QuOKuhMhlqoyXkBL2TuhbKlwak2Ic6HpbQc4YqdbIIJIEokRNwcx9sgMa4sLKlf9kFUhpPMnQ8waLpEKNGf4hBVZ9BKTP7wxstef6JiPO1qX2GJjQHdifxEfD0s38UKJ
   static const apiUrl = '$serverUrl/api';
   static const apiUser = '$serverUrl/user';
 }

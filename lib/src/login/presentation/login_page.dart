@@ -1,3 +1,4 @@
+import 'package:ease_studyante_app/src/home/presentation/pages/home_screen.dart';
 import 'package:ease_studyante_app/src/teacher/bloc/teacher_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/teacher_home.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-
+    emailCtrl.text = 'denstudent@deped.com';
+    passwordCtrl.text = 'asd000!!';
     loginBloc = LoginBloc(LoginRepositoryImpl());
   }
 
@@ -149,8 +151,15 @@ class _LoginPageState extends State<LoginPage> {
             builder: (BuildContext context) => const TeacherHomePage()),
         ModalRoute.withName('/'),
       );
+    } else {
+      Navigator.pushAndRemoveUntil<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const HomeScreen(),
+        ),
+        ModalRoute.withName('/'),
+      );
     }
-
     // return student view home
   }
 }
