@@ -1,5 +1,6 @@
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
 import 'package:ease_studyante_app/core/routes/routes.dart';
+import 'package:ease_studyante_app/src/landing/presentation/landing_page.dart';
 import 'package:ease_studyante_app/src/teacher/bloc/teacher_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/pages/profile/data/data_sources/teacher_profile_repository_impl.dart';
 import 'package:ease_studyante_app/src/teacher/teacher_home.dart';
@@ -7,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'landing/presentation/landing_page.dart';
 
 class EaseStudyanteApp extends StatefulWidget {
   const EaseStudyanteApp({super.key});

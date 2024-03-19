@@ -1,3 +1,7 @@
+import 'package:ease_studyante_app/src/home/presentation/pages/home_screen.dart';
+import 'package:ease_studyante_app/src/schedule/repository/schedule_repository.dart';
+import 'package:ease_studyante_app/src/schedule/repository/schedule_repository_impl.dart';
+import 'package:ease_studyante_app/src/subject/presentation/blocs/bloc/subject_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/bloc/teacher_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/teacher_home.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +20,11 @@ import 'widgets/login_header.dart';
 
 class LoginArgs {
   final bool isTeacher;
+  final bool isStudent;
 
   LoginArgs({
     required this.isTeacher,
+    required this.isStudent,
   });
 }
 
@@ -45,7 +51,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-
+    emailCtrl.text = 'denstudent@deped.com';
+    passwordCtrl.text = 'asd000!!';
     loginBloc = LoginBloc(LoginRepositoryImpl());
   }
 
@@ -125,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
           emailAddress: emailCtrl.value.text,
           password: passwordCtrl.value.text,
           isTeacher: widget.args.isTeacher,
+          isStudent: widget.args.isStudent,
         ),
       );
     }
@@ -149,8 +157,25 @@ class _LoginPageState extends State<LoginPage> {
             builder: (BuildContext context) => const TeacherHomePage()),
         ModalRoute.withName('/'),
       );
+    } else {
+      Navigator.pushAndRemoveUntil<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) =>
+              RepositoryProvider<ScheduleRepository>(
+            create: (context) => ScheduleRepositoryImpl(),
+            child: BlocProvider<SubjectBloc>(
+              create: (context) => SubjectBloc(
+                scheduleRepository:
+                    RepositoryProvider.of<ScheduleRepository>(context),
+              ),
+              child: const HomeScreen(),
+            ),
+          ),
+        ),
+        ModalRoute.withName('/'),
+      );
     }
-
     // return student view home
   }
 }
