@@ -35,6 +35,7 @@ class LandingBody extends StatelessWidget {
     Navigator.of(context).pushNamed(LoginPage.routeName,
         arguments: LoginArgs(
           isTeacher: true,
+          isStudent: false,
         ));
   }
 
@@ -42,6 +43,7 @@ class LandingBody extends StatelessWidget {
     Navigator.of(context).pushNamed(LoginPage.routeName,
         arguments: LoginArgs(
           isTeacher: false,
+          isStudent: true,
         ));
   }
 }

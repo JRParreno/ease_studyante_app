@@ -4,6 +4,7 @@ import 'package:ease_studyante_app/core/common_widget/common_widget.dart';
 import 'package:ease_studyante_app/gen/colors.gen.dart';
 import 'package:ease_studyante_app/src/teacher/pages/qr_code/data/data_sources/qr_repository_impl.dart';
 import 'package:ease_studyante_app/src/teacher/pages/qr_code/presentation/bloc/qr_code_scanner_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';

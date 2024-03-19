@@ -14,7 +14,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> onSubmitLoginEvent(
-      OnSubmitLoginEvent event, Emitter<LoginState> emit) async {
+    OnSubmitLoginEvent event,
+    Emitter<LoginState> emit,
+  ) async {
     try {
       emit(LoginLoading());
 
@@ -22,9 +24,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         email: event.emailAddress,
         password: event.password,
         isParent: event.isParent,
-        isStudent: false,
+        isStudent: event.isStudent,
         isTeacher: event.isTeacher,
       );
+
       await repository.saveTokens(
           accessToken: response.data['access_token'],
           refreshToken: response.data['refresh_token']);
