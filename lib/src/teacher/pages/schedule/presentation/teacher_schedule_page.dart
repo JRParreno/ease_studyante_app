@@ -12,6 +12,14 @@ class TeacherSchedulePage extends StatefulWidget {
 }
 
 class _TeacherSchedulePageState extends State<TeacherSchedulePage> {
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    handleEventScrollListener();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,6 +41,7 @@ class _TeacherSchedulePageState extends State<TeacherSchedulePage> {
                     isPaginate: state.isPaginate,
                     onTap: (schedule) {},
                     schedules: state.teacherScheduleModel.schedules,
+                    controller: scrollController,
                   );
                 }
 
@@ -43,5 +52,15 @@ class _TeacherSchedulePageState extends State<TeacherSchedulePage> {
         ],
       ),
     );
+  }
+
+  void handleEventScrollListener() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >
+          (scrollController.position.pixels * 0.75)) {
+        BlocProvider.of<TeacherScheduleBloc>(context)
+            .add(OnPaginateTeacherScheduleEvent());
+      }
+    });
   }
 }
