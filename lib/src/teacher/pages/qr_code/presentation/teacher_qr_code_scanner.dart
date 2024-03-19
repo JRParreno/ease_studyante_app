@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:ease_studyante_app/core/common_widget/common_widget.dart';
 import 'package:ease_studyante_app/gen/colors.gen.dart';
-import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/attendance.dart';
 import 'package:ease_studyante_app/src/teacher/pages/qr_code/data/data_sources/qr_repository_impl.dart';
 import 'package:ease_studyante_app/src/teacher/pages/qr_code/presentation/bloc/qr_code_scanner_bloc.dart';
 import 'package:flutter/material.dart';
@@ -167,10 +166,3 @@ class _TeacherQRCodeScannerState extends State<TeacherQRCodeScanner> {
     );
   }
 }
-
-// Center(
-//             child: (result != null)
-//                 ? Text(
-//                     'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-//                 : const Text('Scan a code'),
-//           ),
