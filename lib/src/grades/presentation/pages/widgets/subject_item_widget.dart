@@ -1,13 +1,14 @@
+import 'package:ease_studyante_app/src/subject/domain/entities/subject_model.dart';
 import 'package:ease_studyante_app/src/subject/presentation/pages/subject_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SubjectItemWidget extends StatelessWidget {
-  final String name;
+  final SubjectModel subject;
 
   const SubjectItemWidget({
     super.key,
-    required this.name,
+    required this.subject,
   });
 
   @override
@@ -19,7 +20,7 @@ class SubjectItemWidget extends StatelessWidget {
           PageTransition(
             duration: const Duration(milliseconds: 250),
             type: PageTransitionType.fade,
-            child: SubjectDetailScreen(name: name),
+            child: SubjectDetailScreen(subject: subject),
           ),
         );
       },
@@ -42,7 +43,7 @@ class SubjectItemWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Text(
-            name,
+            subject.name,
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
         ),

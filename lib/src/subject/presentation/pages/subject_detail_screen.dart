@@ -1,18 +1,20 @@
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
+import 'package:ease_studyante_app/core/local_storage/local_storage.dart';
 
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
 import 'package:ease_studyante_app/core/common_widget/gpa_tile_widget.dart';
 import 'package:ease_studyante_app/src/attendance/presentation/pages/attendance_screen.dart';
 import 'package:ease_studyante_app/src/grades/presentation/pages/widgets/grading_item_widget.dart';
+import 'package:ease_studyante_app/src/subject/domain/entities/subject_model.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SubjectDetailScreen extends StatefulWidget {
-  final String name;
+  final SubjectModel subject;
 
   const SubjectDetailScreen({
     super.key,
-    required this.name,
+    required this.subject,
   });
 
   @override
@@ -26,12 +28,17 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
     GradingItemWidget(gradingPeriod: 'Third Grading'),
     GradingItemWidget(gradingPeriod: 'Fourth Grading'),
   ];
+  @override
+  void initState() {
+    super.initState();
+    getUserProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name),
+        title: Text(widget.subject.name),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -40,10 +47,41 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: 100,
-              color: Colors.red,
-              child: const Center(
-                child: Text('Subject information here'),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    blurRadius: 2,
+                    offset: const Offset(0, 3),
+                  )
+                ],
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(
+                    5,
+                  ),
+                ),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                child: SpacedColumn(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Subject Code: ${widget.subject.code}',
+                    ),
+                    Text(
+                      'Department: ${widget.subject.department.name}',
+                    ),
+                    Text(
+                      'Department code: ${widget.subject.department.code}',
+                    ),
+                    Text(
+                      'Year Level: ${widget.subject.yearLevel}',
+                    )
+                  ],
+                ),
               ),
             ),
             Container(
@@ -116,5 +154,11 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> getUserProfile() async {
+    final user = await LocalStorage.readLocalStorage('_user');
+
+    final asd = user;
   }
 }

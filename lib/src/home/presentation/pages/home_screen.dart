@@ -1,5 +1,6 @@
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
 import 'package:ease_studyante_app/src/chat/presentation/pages/chat_screen.dart';
+
 import 'package:ease_studyante_app/src/subject/presentation/pages/subject_screen.dart';
 import 'package:flutter/material.dart';
 
