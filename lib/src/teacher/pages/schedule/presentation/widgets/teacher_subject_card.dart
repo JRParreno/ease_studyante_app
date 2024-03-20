@@ -40,6 +40,9 @@ class TeacherSubjectCard extends StatelessWidget {
                   text:
                       '${schedule.section.yearLevel} - ${schedule.section.name}',
                 ),
+                CustomText(
+                  text: '${schedule.timeStart} - ${schedule.timeEnd}',
+                ),
               ],
             ),
           ),
