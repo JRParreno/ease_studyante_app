@@ -69,6 +69,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
           onTapLogout: handleLogout,
         ),
         bottomNavigationBar: AnimatedBottomNavigationBar(
+          height: 60,
           icons: iconList,
           activeIndex: _bottomNavIndex,
           leftCornerRadius: 20,
