@@ -51,8 +51,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    emailCtrl.text = 'denstudent@deped.com';
-    passwordCtrl.text = 'asd000!!';
+    // emailCtrl.text = 'denstudent@deped.com';
+    // passwordCtrl.text = 'asd000!!';
     loginBloc = LoginBloc(LoginRepositoryImpl());
   }
 
