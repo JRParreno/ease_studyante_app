@@ -22,7 +22,7 @@ class AppConstant {
   static const clientId = 'za0JTqP0o9c6NExKIXDOYTEqvud3uwu35f3raHDV';
   static const clientSecret =
       'QuOKuhMhlqoyXkBL2TuhbKlwak2Ic6HpbQc4YqdbIIJIEokRNwcx9sgMa4sLKlf9kFUhpPMnQ8waLpEKNGf4hBVZ9BKTP7wxstef6JiPO1qX2GJjQHdifxEfD0s38UKJ';
-  static const serverUrl = 'http://127.0.0.1:8000';
+  static const serverUrl = 'https://ease-studyante-core.onrender.com';
   //'http://192.168.68.100:8000';
   //za0JTqP0o9c6NExKIXDOYTEqvud3uwu35f3raHDV
   //QuOKuhMhlqoyXkBL2TuhbKlwak2Ic6HpbQc4YqdbIIJIEokRNwcx9sgMa4sLKlf9kFUhpPMnQ8waLpEKNGf4hBVZ9BKTP7wxstef6JiPO1qX2GJjQHdifxEfD0s38UKJ
