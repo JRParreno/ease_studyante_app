@@ -19,9 +19,9 @@ class AppConstant {
   );
   static const appName = 'EaseStudyante';
 
-  static const clientId = 'za0JTqP0o9c6NExKIXDOYTEqvud3uwu35f3raHDV';
+  static const clientId = 'Wk4SyLUdxleOKlGWJEVTulM1pjlLQkcFnIVMtf2S';
   static const clientSecret =
-      'QuOKuhMhlqoyXkBL2TuhbKlwak2Ic6HpbQc4YqdbIIJIEokRNwcx9sgMa4sLKlf9kFUhpPMnQ8waLpEKNGf4hBVZ9BKTP7wxstef6JiPO1qX2GJjQHdifxEfD0s38UKJ';
+      'V3UXqzMseJw6xifMThX2AgGIJasgYm0FLa5fXuqR8frGObuC3t4PfZp1sT8L0zccW4MKQ5akft7fjQMFeLyufyEviFHVaJN49HdjH3rb8Kng0QwvfKnhPiW04bYioOkn';
   static const serverUrl = 'https://ease-studyante-core.onrender.com';
   //'http://192.168.68.100:8000';
   //za0JTqP0o9c6NExKIXDOYTEqvud3uwu35f3raHDV
