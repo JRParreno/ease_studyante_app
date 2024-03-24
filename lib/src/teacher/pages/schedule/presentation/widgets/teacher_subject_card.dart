@@ -1,3 +1,4 @@
+import 'package:ease_studyante_app/core/extensions/time_formatter.dart';
 import 'package:ease_studyante_app/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,8 @@ class TeacherSubjectCard extends StatelessWidget {
                       '${schedule.section.yearLevel} - ${schedule.section.name}',
                 ),
                 CustomText(
-                  text: '${schedule.timeStart} - ${schedule.timeEnd}',
+                  text:
+                      '${schedule.timeStart.parseStrToTime()} - ${schedule.timeEnd.parseStrToTime()}',
                 ),
               ],
             ),

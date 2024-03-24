@@ -13,14 +13,44 @@ class StudentListBloc extends Bloc<StudentListEvent, StudentListState> {
 
   StudentListBloc(this.repository) : super(StudentListInitial()) {
     on<OnGetTeacherStudentList>(onGetTeacherStudentList);
+    on<OnPaginateTeacherStudentList>(onPaginateTeacherStudentList);
   }
 
   Future<void> onGetTeacherStudentList(
       OnGetTeacherStudentList event, Emitter<StudentListState> emit) async {
     emit(StudentListLoading());
+    try {
+      final response = await repository.getStudentList(section: event.section);
 
-    final response = await repository.getStudentList(section: event.section);
+      emit(StudentListLoaded(studentList: response));
+    } catch (e) {
+      emit(StudentListError(errorMessage: e.toString()));
+    }
+  }
 
-    emit(StudentListLoaded(studentList: response));
+  Future<void> onPaginateTeacherStudentList(OnPaginateTeacherStudentList event,
+      Emitter<StudentListState> emit) async {
+    final state = this.state;
+
+    if (state is StudentListLoaded &&
+        state.studentList.nextPage != null &&
+        !state.isPaginate) {
+      emit(state.copyWith(isPaginate: true));
+
+      try {
+        final response = await repository.getStudentList(
+            section: event.section, next: state.studentList.nextPage);
+        emit(
+          state.copyWith(
+            studentList: response.copyWith(
+              students: [...state.studentList.students, ...response.students],
+            ),
+            isPaginate: false,
+          ),
+        );
+      } catch (e) {
+        emit(StudentListError(errorMessage: e.toString()));
+      }
+    }
   }
 }

@@ -27,6 +27,18 @@ class StudentListResponseModel extends Equatable {
     );
   }
 
+  StudentListResponseModel copyWith({
+    List<Student>? students,
+    String? nextPage,
+    int? totalCount,
+  }) {
+    return StudentListResponseModel(
+      students: students ?? this.students,
+      totalCount: totalCount ?? this.totalCount,
+      nextPage: nextPage ?? this.nextPage,
+    );
+  }
+
   factory StudentListResponseModel.fromJson(String source) =>
       StudentListResponseModel.fromMap(json.decode(source));
 }
