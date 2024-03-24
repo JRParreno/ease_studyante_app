@@ -20,4 +20,15 @@ class OnGetTeacherStudentList extends StudentListEvent {
       ];
 }
 
-class OnPaginateTeacherStudentList extends StudentListEvent {}
+class OnPaginateTeacherStudentList extends StudentListEvent {
+  final String section;
+
+  const OnPaginateTeacherStudentList({
+    required this.section,
+  });
+
+  @override
+  List<Object> get props => [
+        section,
+      ];
+}
