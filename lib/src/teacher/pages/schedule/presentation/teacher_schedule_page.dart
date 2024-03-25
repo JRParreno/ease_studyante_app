@@ -69,7 +69,7 @@ class _TeacherSchedulePageState extends State<TeacherSchedulePage> {
   void handleOnTapSchedule(Section section) {
     Navigator.of(context).pushNamed(StudentListPage.routeName,
         arguments: StudentListArgs(
-            section: section.id,
+            section: section,
             appbarTitle: '${section.yearLevel} - ${section.name}'));
   }
 }

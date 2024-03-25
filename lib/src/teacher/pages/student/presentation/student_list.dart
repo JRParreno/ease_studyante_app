@@ -1,12 +1,14 @@
 import 'package:ease_studyante_app/core/common_widget/custom_appbar.dart';
 import 'package:ease_studyante_app/core/common_widget/custom_text.dart';
+import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/section.dart';
 import 'package:ease_studyante_app/src/teacher/pages/student/data/data_sources/student_list_repository_impl.dart';
 import 'package:ease_studyante_app/src/teacher/pages/student/presentation/bloc/student_list_bloc.dart';
+import 'package:ease_studyante_app/src/teacher/pages/student/presentation/widgets/student_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StudentListArgs {
-  final String section;
+  final Section section;
   final String appbarTitle;
 
   StudentListArgs({
@@ -26,6 +28,7 @@ class StudentListPage extends StatefulWidget {
 }
 
 class _StudentListPageState extends State<StudentListPage> {
+  final ScrollController scrollController = ScrollController();
   late StudentListBloc studentListBloc;
 
   @override
@@ -38,7 +41,7 @@ class _StudentListPageState extends State<StudentListPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => studentListBloc
-        ..add(OnGetTeacherStudentList(section: widget.args.section)),
+        ..add(OnGetTeacherStudentList(section: widget.args.section.id)),
       child: Scaffold(
         appBar: buildAppBar(context: context, title: widget.args.appbarTitle),
         body: BlocBuilder<StudentListBloc, StudentListState>(
@@ -49,7 +52,12 @@ class _StudentListPageState extends State<StudentListPage> {
               );
             }
             if (state is StudentListLoaded) {
-              return Container();
+              return StudentListView(
+                scrollController: scrollController,
+                isPaginate: state.isPaginate,
+                students: state.studentList.students,
+                section: widget.args.section,
+              );
             }
             return const Center(
               child: CircularProgressIndicator(),
@@ -58,5 +66,15 @@ class _StudentListPageState extends State<StudentListPage> {
         ),
       ),
     );
+  }
+
+  void handleEventScrollListener() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >
+          (scrollController.position.pixels * 0.75)) {
+        BlocProvider.of<StudentListBloc>(context)
+            .add(OnPaginateTeacherStudentList(section: widget.args.section.id));
+      }
+    });
   }
 }

@@ -33,6 +33,16 @@ class StudentListLoaded extends StudentListState {
     this.isPaginate = false,
   });
 
+  StudentListLoaded copyWith({
+    StudentListResponseModel? studentList,
+    bool? isPaginate,
+  }) {
+    return StudentListLoaded(
+      studentList: studentList ?? this.studentList,
+      isPaginate: isPaginate ?? this.isPaginate,
+    );
+  }
+
   @override
   List<Object> get props => [
         studentList,
