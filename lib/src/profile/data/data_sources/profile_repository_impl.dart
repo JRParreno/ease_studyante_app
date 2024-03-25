@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import '../../../../core/config/app_constant.dart';
-import '../../../../core/interceptor/api_interceptor.dart';
-import '../../domain/entities/profile.dart';
-import '../../domain/repository/profile_repository.dart';
+import 'package:ease_studyante_app/core/config/app_constant.dart';
+import 'package:ease_studyante_app/core/interceptor/api_interceptor.dart';
+import 'package:ease_studyante_app/src/profile/domain/entities/profile.dart';
+import 'package:ease_studyante_app/src/profile/domain/repository/profile_repository.dart';
 
 class ProfileRepositoryImpl extends ProfileRepository {
   @override
@@ -34,6 +34,19 @@ class ProfileRepositoryImpl extends ProfileRepository {
       throw error!;
     }).catchError((onError) {
       throw onError;
+    });
+  }
+
+  @override
+  Future<Profile> getStudentProfile() async {
+    const String url = '${AppConstant.apiUrl}/student/profile';
+    return await ApiInterceptor.apiInstance().get(url).then((value) {
+      final response = Profile.fromMap(value.data);
+      return response;
+    }).catchError((error) {
+      throw error;
+    }).onError((error, stackTrace) {
+      throw error!;
     });
   }
 }

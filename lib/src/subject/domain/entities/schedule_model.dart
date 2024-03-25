@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ease_studyante_app/src/subject/domain/entities/subject_model.dart';
 import 'package:ease_studyante_app/src/subject/domain/entities/teacher_model.dart';
+import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/section.dart';
 
 class ScheduleModel {
   final String id;
@@ -10,6 +11,7 @@ class ScheduleModel {
   final String timeEnd;
   final SubjectModel subject;
   final TeacherModel teacher;
+  final Section section;
 
   ScheduleModel({
     required this.id,
@@ -18,6 +20,7 @@ class ScheduleModel {
     required this.timeEnd,
     required this.subject,
     required this.teacher,
+    required this.section,
   });
 
   factory ScheduleModel.fromMap(Map<String, dynamic> map) {
@@ -31,6 +34,9 @@ class ScheduleModel {
       ),
       teacher: TeacherModel.fromMap(
         map['teacher'] as Map<String, dynamic>,
+      ),
+      section: Section.fromMap(
+        map['section'] as Map<String, dynamic>,
       ),
     );
   }

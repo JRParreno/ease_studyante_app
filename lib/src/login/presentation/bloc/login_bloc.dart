@@ -1,3 +1,4 @@
+import 'package:ease_studyante_app/src/profile/domain/repository/profile_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,8 +9,9 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository repository;
+  final ProfileRepository profileRepository;
 
-  LoginBloc(this.repository) : super(LoginInitial()) {
+  LoginBloc(this.repository, this.profileRepository) : super(LoginInitial()) {
     on<OnSubmitLoginEvent>(onSubmitLoginEvent);
   }
 
@@ -29,8 +31,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
 
       await repository.saveTokens(
-          accessToken: response.data['access_token'],
-          refreshToken: response.data['refresh_token']);
+        accessToken: response.data['access_token'],
+        refreshToken: response.data['refresh_token'],
+      );
       emit(LoginSuccess());
     } catch (e) {
       final dynamic error = e;

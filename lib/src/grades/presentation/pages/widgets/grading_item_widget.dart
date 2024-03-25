@@ -1,19 +1,34 @@
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
 import 'package:ease_studyante_app/core/common_widget/spaced_row_widget.dart';
+import 'package:ease_studyante_app/core/extensions/string_extension.dart';
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
+import 'package:ease_studyante_app/src/assessment/domain/assessment_model.dart';
 import 'package:ease_studyante_app/src/grades/presentation/pages/grading_detail_screen.dart';
+import 'package:ease_studyante_app/src/subject/domain/entities/subject_model.dart';
+import 'package:ease_studyante_app/src/subject/presentation/blocs/subject_detail/bloc/subject_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class GradingItemWidget extends StatelessWidget {
-  final String gradingPeriod;
+  final AssessmentModel assessment;
+  final SubjectDetailBloc subjectDetailBloc;
+  final SubjectModel subject;
+
   const GradingItemWidget({
     super.key,
-    required this.gradingPeriod,
+    required this.assessment,
+    required this.subjectDetailBloc,
+    required this.subject,
   });
 
   @override
   Widget build(BuildContext context) {
+    final gradingPeriod = assessment.assessment.gradingPeriod.split('_');
+    String gradingPeriodTitle = '';
+    for (var element in gradingPeriod) {
+      gradingPeriodTitle += '${element.capitalize()} ';
+    }
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -21,7 +36,12 @@ class GradingItemWidget extends StatelessWidget {
           PageTransition(
             duration: const Duration(milliseconds: 250),
             type: PageTransitionType.fade,
-            child: GradingDetailScreen(gradingPeriod: gradingPeriod),
+            child: GradingDetailScreen(
+              assessment: assessment,
+              gradingPeriodTitle: gradingPeriodTitle,
+              subjectDetailBloc: subjectDetailBloc,
+              subject: subject,
+            ),
           ),
         );
       },
@@ -49,7 +69,7 @@ class GradingItemWidget extends StatelessWidget {
             child: SpacedRow(
               children: [
                 Text(
-                  gradingPeriod,
+                  gradingPeriodTitle,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,

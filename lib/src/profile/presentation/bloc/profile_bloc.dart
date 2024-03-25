@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:ease_studyante_app/core/local_storage/local_storage.dart';
@@ -19,6 +20,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<SetProfileLogoutEvent>(_setProfileLogoutEvent);
     on<SetProfilePicture>(_setProfilePicture);
     on<OnGetProfileEvent>(_onGetProfileEvent);
+    on<OnGetStudentProfileEvent>(_onGetStudentProfileEvent);
   }
 
   Future<void> _setProfile(
@@ -66,6 +68,33 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileLoaded(profile: response));
     } catch (e) {
       emit(ProfileError(errorMessage: e.toString()));
+    }
+  }
+
+  FutureOr<void> _onGetStudentProfileEvent(
+    OnGetStudentProfileEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    try {
+      emit(ProfileLoading());
+
+      final response = await repository.getStudentProfile();
+      await LocalStorage.storeLocalStorage(
+        '_studentProfile',
+        response.toString(),
+      );
+
+      emit(
+        ProfileLoaded(
+          profile: response,
+        ),
+      );
+    } catch (e) {
+      emit(
+        ProfileError(
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }

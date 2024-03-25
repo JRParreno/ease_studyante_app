@@ -32,11 +32,13 @@ class LandingBody extends StatelessWidget {
   }
 
   void handleOnTapTeacher(BuildContext context) {
-    Navigator.of(context).pushNamed(LoginPage.routeName,
-        arguments: LoginArgs(
-          isTeacher: true,
-          isStudent: false,
-        ));
+    Navigator.of(context).pushNamed(
+      LoginPage.routeName,
+      arguments: LoginArgs(
+        isTeacher: true,
+        isStudent: false,
+      ),
+    );
   }
 
   void handleOnTapParentStudent(BuildContext context) {

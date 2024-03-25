@@ -1,4 +1,9 @@
+import 'package:ease_studyante_app/core/bloc/bloc/global_bloc.dart';
+import 'package:ease_studyante_app/core/common_widget/custom_appbar.dart';
 import 'package:ease_studyante_app/src/home/presentation/pages/home_screen.dart';
+import 'package:ease_studyante_app/src/login/data/data_sources/login_repository_impl.dart';
+import 'package:ease_studyante_app/src/profile/data/data_sources/profile_repository_impl.dart';
+import 'package:ease_studyante_app/src/profile/presentation/bloc/profile_bloc.dart';
 import 'package:ease_studyante_app/src/schedule/repository/schedule_repository.dart';
 import 'package:ease_studyante_app/src/schedule/repository/schedule_repository_impl.dart';
 import 'package:ease_studyante_app/src/subject/presentation/blocs/bloc/subject_bloc.dart';
@@ -11,8 +16,6 @@ import 'package:gap/gap.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../../core/common_widget/custom_appbar.dart';
-import '../data/data_sources/login_repository_impl.dart';
 import 'bloc/login_bloc.dart';
 import 'widgets/login_footer.dart';
 import 'widgets/login_body.dart';
@@ -47,76 +50,96 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   bool _passwordVisible = false;
   late LoginBloc loginBloc;
+  late ProfileBloc profileBloc;
+  late GlobalBloc globalBloc;
 
   @override
   void initState() {
     super.initState();
-    // emailCtrl.text = 'denstudent@deped.com';
-    // passwordCtrl.text = 'asd000!!';
-    loginBloc = LoginBloc(LoginRepositoryImpl());
+    emailCtrl.text = 'denstudent@deped.com';
+    passwordCtrl.text = 'asd000!!';
+    final profileRepository = ProfileRepositoryImpl();
+    loginBloc = LoginBloc(
+      LoginRepositoryImpl(),
+      profileRepository,
+    );
+    profileBloc = ProfileBloc(profileRepository);
+    globalBloc = BlocProvider.of<GlobalBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => loginBloc,
-      child: Scaffold(
-        appBar: buildAppBar(
-          context: context,
-        ),
-        body: ProgressHUD(
-          child: Builder(builder: (context) {
-            final progressHUD = ProgressHUD.of(context);
+    return BlocListener<ProfileBloc, ProfileState>(
+      bloc: profileBloc,
+      listener: (context, state) {
+        if (state is ProfileLoaded) {
+          globalBloc.add(
+            StoreStudentProfileEvent(
+              profile: state.profile,
+            ),
+          );
+        }
+      },
+      child: BlocProvider(
+        create: (context) => loginBloc,
+        child: Scaffold(
+          appBar: buildAppBar(
+            context: context,
+          ),
+          body: ProgressHUD(
+            child: Builder(builder: (context) {
+              final progressHUD = ProgressHUD.of(context);
 
-            return BlocListener<LoginBloc, LoginState>(
-              listener: (context, state) {
-                if (state is LoginLoading) {
-                  progressHUD?.show();
-                }
-
-                if (state is LoginSuccess || state is LoginError) {
-                  progressHUD?.dismiss();
-
-                  if (state is LoginSuccess) {
-                    handleNavigate();
+              return BlocListener<LoginBloc, LoginState>(
+                listener: (context, state) {
+                  if (state is LoginLoading) {
+                    progressHUD?.show();
                   }
 
-                  if (state is LoginError) {
-                    handleErrorMessage(state.errorMessage);
+                  if (state is LoginSuccess || state is LoginError) {
+                    progressHUD?.dismiss();
+
+                    if (state is LoginSuccess) {
+                      handleNavigate();
+                    }
+
+                    if (state is LoginError) {
+                      handleErrorMessage(state.errorMessage);
+                    }
                   }
-                }
-              },
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    LoginHeader(
-                      title:
-                          'Login ${widget.args.isTeacher ? 'Teacher' : 'Student/Parent'}',
-                    ),
-                    const Gap(15),
-                    LoginBody(
-                      formKey: _formKey,
-                      emailCtrl: emailCtrl,
-                      passwordCtrl: passwordCtrl,
-                      onSubmit: handleSubmit,
-                      passwordVisible: _passwordVisible,
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                        child: Icon(_passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off),
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      LoginHeader(
+                        title:
+                            'Login ${widget.args.isTeacher ? 'Teacher' : 'Student/Parent'}',
                       ),
-                    ),
-                    const LoginFooter(),
-                  ],
+                      const Gap(15),
+                      LoginBody(
+                        formKey: _formKey,
+                        emailCtrl: emailCtrl,
+                        passwordCtrl: passwordCtrl,
+                        onSubmit: handleSubmit,
+                        passwordVisible: _passwordVisible,
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                          child: Icon(_passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                        ),
+                      ),
+                      const LoginFooter(),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+          ),
         ),
       ),
     );
@@ -154,10 +177,12 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushAndRemoveUntil<void>(
         context,
         MaterialPageRoute<void>(
-            builder: (BuildContext context) => const TeacherHomePage()),
+          builder: (BuildContext context) => const TeacherHomePage(),
+        ),
         ModalRoute.withName('/'),
       );
     } else {
+      profileBloc.add(OnGetStudentProfileEvent());
       Navigator.pushAndRemoveUntil<void>(
         context,
         MaterialPageRoute<void>(
