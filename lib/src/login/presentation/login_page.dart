@@ -1,6 +1,6 @@
 import 'package:ease_studyante_app/core/bloc/bloc/global_bloc.dart';
 import 'package:ease_studyante_app/core/common_widget/custom_appbar.dart';
-import 'package:ease_studyante_app/src/home/presentation/pages/home_screen.dart';
+import 'package:ease_studyante_app/src/home/presentation/pages/student_home.dart';
 import 'package:ease_studyante_app/src/login/data/data_sources/login_repository_impl.dart';
 import 'package:ease_studyante_app/src/profile/data/data_sources/profile_repository_impl.dart';
 import 'package:ease_studyante_app/src/profile/presentation/bloc/profile_bloc.dart';
@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                 scheduleRepository:
                     RepositoryProvider.of<ScheduleRepository>(context),
               ),
-              child: const HomeScreen(),
+              child: const StudentHome(),
             ),
           ),
         ),

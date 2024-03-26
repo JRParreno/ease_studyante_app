@@ -33,15 +33,16 @@ class Profile {
     );
   }
 
-  Profile copyWith(
-      {String? pk,
-      String? username,
-      String? firstName,
-      String? lastName,
-      String? email,
-      String? profilePk,
-      String? profilePhoto,
-      String? gender}) {
+  Profile copyWith({
+    String? pk,
+    String? username,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? profilePk,
+    String? profilePhoto,
+    String? gender,
+  }) {
     return Profile(
       pk: pk ?? this.pk,
       username: username ?? this.username,
