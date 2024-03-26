@@ -21,3 +21,5 @@ class SetProfilePicture extends ProfileEvent {
 class SetProfileLogoutEvent extends ProfileEvent {}
 
 class OnGetProfileEvent extends ProfileEvent {}
+
+class OnGetStudentProfileEvent extends ProfileEvent {}

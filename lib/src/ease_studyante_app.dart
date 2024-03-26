@@ -1,3 +1,4 @@
+import 'package:ease_studyante_app/core/bloc/bloc/global_bloc.dart';
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
 import 'package:ease_studyante_app/core/routes/routes.dart';
 import 'package:ease_studyante_app/src/landing/presentation/landing_page.dart';
@@ -36,8 +37,15 @@ class _EaseStudyanteAppState extends State<EaseStudyanteApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => teacherBloc..add(SetTeacherProfileEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => teacherBloc..add(SetTeacherProfileEvent()),
+        ),
+        BlocProvider<GlobalBloc>(
+          create: (context) => GlobalBloc(),
+        ),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,

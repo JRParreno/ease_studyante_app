@@ -21,6 +21,18 @@ class Profile {
     this.profilePhoto,
   });
 
+  factory Profile.empty() {
+    return Profile(
+      pk: '',
+      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      profilePk: '',
+      gender: '',
+    );
+  }
+
   Profile copyWith(
       {String? pk,
       String? username,

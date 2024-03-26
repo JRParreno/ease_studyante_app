@@ -1,4 +1,8 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:ease_studyante_app/core/bloc/bloc/global_bloc.dart';
+
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
+import 'package:ease_studyante_app/gen/colors.gen.dart';
 import 'package:ease_studyante_app/src/chat/presentation/pages/chat_screen.dart';
 
 import 'package:ease_studyante_app/src/subject/presentation/pages/subject_screen.dart';
@@ -13,11 +17,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ValueNotifier<int> selectedIndex = ValueNotifier(0);
-
+  late GlobalBloc globalBloc;
   List<Widget> screens = const [
     SubjectScreen(),
     ChatScreen(),
   ];
+
+  final iconList = <IconData>[
+    Icons.home,
+    Icons.chat_bubble,
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,46 +40,19 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, index, child) {
         return Scaffold(
           body: screens.elementAt(index),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: index,
-            selectedIconTheme: const IconThemeData(
-              color: ColorSchemes.red,
-            ),
-            selectedItemColor: ColorSchemes.red,
-            unselectedItemColor: ColorSchemes.bodyLabel,
-            unselectedIconTheme: const IconThemeData(
-              color: ColorSchemes.bodyLabel,
-            ),
-            unselectedLabelStyle: const TextStyle(
-              color: ColorSchemes.bodyLabel,
-              fontSize: 8,
-              letterSpacing: .5,
-              fontWeight: FontWeight.bold,
-            ),
-            selectedLabelStyle: const TextStyle(
-              color: ColorSchemes.red,
-              fontSize: 8,
-              letterSpacing: .5,
-              fontWeight: FontWeight.bold,
-            ),
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(
-                label: 'Subject',
-                icon: Icon(
-                  Icons.list_rounded,
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'Chat',
-                icon: Icon(
-                  Icons.chat_bubble,
-                ),
-              ),
-            ],
+          bottomNavigationBar: AnimatedBottomNavigationBar(
+            height: 60,
+            icons: iconList,
+            activeIndex: index,
+            leftCornerRadius: 20,
+            rightCornerRadius: 20,
+            activeColor: Colors.white,
+            inactiveColor: ColorName.placeHolder,
+            backgroundColor: ColorName.primary,
             onTap: (currentIndex) {
               selectedIndex.value = currentIndex;
             },
+            gapLocation: GapLocation.none,
           ),
         );
       },
