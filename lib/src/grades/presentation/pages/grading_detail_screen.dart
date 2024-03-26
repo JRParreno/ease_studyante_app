@@ -1,4 +1,5 @@
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
+import 'package:ease_studyante_app/gen/colors.gen.dart';
 import 'package:ease_studyante_app/src/assessment/domain/assessment_model.dart';
 import 'package:ease_studyante_app/src/grades/presentation/pages/widgets/component_item_tile_widget.dart';
 import 'package:ease_studyante_app/src/grades/presentation/pages/widgets/grading_component_tile_widget.dart';
@@ -75,7 +76,14 @@ class _GradingDetailScreenState extends State<GradingDetailScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(widget.gradingPeriodTitle),
+            title: Text(
+              widget.gradingPeriodTitle,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            backgroundColor: ColorName.primary,
+            iconTheme: const IconThemeData(color: Colors.white),
           ),
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),

@@ -2,7 +2,11 @@ import 'package:ease_studyante_app/core/bloc/bloc/global_bloc.dart';
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
 import 'package:ease_studyante_app/core/common_widget/gpa_tile_widget.dart';
+import 'package:ease_studyante_app/gen/colors.gen.dart';
 import 'package:ease_studyante_app/src/assessment/domain/assessment_model.dart';
+import 'package:ease_studyante_app/src/attendance/data/repository/attendance_repository.dart';
+import 'package:ease_studyante_app/src/attendance/data/repository/attendance_repository_impl.dart';
+import 'package:ease_studyante_app/src/attendance/presentation/blocs/bloc/attendance_bloc.dart';
 import 'package:ease_studyante_app/src/attendance/presentation/pages/attendance_screen.dart';
 import 'package:ease_studyante_app/src/grades/presentation/pages/widgets/grading_item_widget.dart';
 import 'package:ease_studyante_app/src/subject/domain/entities/subject_model.dart';
@@ -27,13 +31,6 @@ class SubjectDetailScreen extends StatefulWidget {
 }
 
 class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
-  // List<Widget> gradingItems = const [
-  //   GradingItemWidget(gradingPeriod: 'First Grading'),
-  //   GradingItemWidget(gradingPeriod: 'Second Grading'),
-  //   GradingItemWidget(gradingPeriod: 'Third Grading'),
-  //   GradingItemWidget(gradingPeriod: 'Fourth Grading'),
-  // ];
-
   late SubjectDetailBloc subjectDetailBloc;
   late GlobalBloc globalBloc;
 
@@ -50,20 +47,29 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.subject.name),
+        title: Text(
+          widget.subject.name,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: ColorName.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: BlocBuilder<SubjectDetailBloc, SubjectDetailState>(
         bloc: subjectDetailBloc,
         builder: (context, state) {
           final List<AssessmentModel> gradingList = [];
           for (var element in state.assessment) {
-            if (gradingList.isEmpty) {
-              gradingList.add(element);
-            } else {
-              for (var assessmentItem in gradingList) {
-                if (assessmentItem.assessment.gradingPeriod !=
-                    element.assessment.gradingPeriod) {
-                  gradingList.add(element);
+            if (element.assessment.subject.code == widget.subject.code) {
+              if (gradingList.isEmpty) {
+                gradingList.add(element);
+              } else {
+                for (var assessmentItem in gradingList) {
+                  if (assessmentItem.assessment.gradingPeriod !=
+                      element.assessment.gradingPeriod) {
+                    gradingList.add(element);
+                  }
                 }
               }
             }
@@ -156,7 +162,17 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
                       PageTransition(
                         duration: const Duration(milliseconds: 250),
                         type: PageTransitionType.fade,
-                        child: const AttendanceScreen(),
+                        child: RepositoryProvider<AttendanceRepository>(
+                          create: (context) => AttendanceRepositoryImpl(),
+                          child: BlocProvider<AttendanceBloc>(
+                            create: (context) => AttendanceBloc(
+                              attendanceRepository:
+                                  RepositoryProvider.of<AttendanceRepository>(
+                                      context),
+                            ),
+                            child: AttendanceScreen(subject: widget.subject),
+                          ),
+                        ),
                       ),
                     );
                   },

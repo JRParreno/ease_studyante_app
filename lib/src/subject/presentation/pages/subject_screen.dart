@@ -65,6 +65,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
                               return SubjectItemWidget(
                                 subject: state.schedule[index].subject,
                                 section: state.schedule[index].section,
+                                schedule: state.schedule[index],
                               );
                             },
                           ),
