@@ -37,43 +37,6 @@ class _GradingDetailScreenState extends State<GradingDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> assignmentItems = const [
-      ComponentItemTileWidget(
-        componentItemName: 'Assignment #1',
-        grade: '15/15',
-      ),
-      ComponentItemTileWidget(
-        componentItemName: 'Assignment #2',
-        grade: '5/10',
-      ),
-      ComponentItemTileWidget(
-          componentItemName: 'Assignment #3', grade: '1/5,'),
-    ];
-
-    List<Widget> quizItems = const [
-      ComponentItemTileWidget(
-        componentItemName: 'Quiz #1',
-        grade: '15/15',
-      ),
-      ComponentItemTileWidget(
-        componentItemName: 'Quiz #2',
-        grade: '5/10',
-      ),
-      ComponentItemTileWidget(componentItemName: 'Quiz #3', grade: '1/5,'),
-    ];
-
-    List<Widget> examItems = const [
-      ComponentItemTileWidget(
-        componentItemName: 'Exam #1',
-        grade: '15/15',
-      ),
-      ComponentItemTileWidget(
-        componentItemName: 'Exam #2',
-        grade: '5/10',
-      ),
-      ComponentItemTileWidget(componentItemName: 'Exam #3', grade: '1/5,'),
-    ];
-
     return BlocBuilder<SubjectDetailBloc, SubjectDetailState>(
       bloc: subjectDetailBloc,
       builder: (context, state) {

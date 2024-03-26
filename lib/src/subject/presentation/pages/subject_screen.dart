@@ -1,3 +1,4 @@
+import 'package:ease_studyante_app/core/bloc/bloc/global_bloc.dart';
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
 import 'package:ease_studyante_app/core/enum/view_status.dart';
 import 'package:ease_studyante_app/src/grades/presentation/pages/widgets/subject_item_widget.dart';
@@ -14,19 +15,30 @@ class SubjectScreen extends StatefulWidget {
 
 class _SubjectScreenState extends State<SubjectScreen> {
   late SubjectBloc subjectBloc;
+  late GlobalBloc globalBloc;
 
   @override
   void initState() {
     super.initState();
     subjectBloc = BlocProvider.of<SubjectBloc>(context);
     subjectBloc.add(GetStudentSchedule());
+    globalBloc = BlocProvider.of<GlobalBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<SubjectBloc, SubjectState>(
+        child: BlocConsumer<SubjectBloc, SubjectState>(
+          listener: (context, state) {
+            if (state.viewStatus == ViewStatus.successful) {
+              globalBloc.add(
+                StoreStudentSectionEvent(
+                  section: state.schedule[0].section,
+                ),
+              );
+            }
+          },
           builder: (context, state) {
             return state.viewStatus == ViewStatus.loading
                 ? const Center(

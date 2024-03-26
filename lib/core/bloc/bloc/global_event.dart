@@ -8,3 +8,10 @@ class StoreStudentProfileEvent extends GlobalEvent {
   @override
   List<Object?> get props => [profile];
 }
+
+class StoreStudentSectionEvent extends GlobalEvent {
+  final Section section;
+  StoreStudentSectionEvent({required this.section});
+  @override
+  List<Object?> get props => [section];
+}

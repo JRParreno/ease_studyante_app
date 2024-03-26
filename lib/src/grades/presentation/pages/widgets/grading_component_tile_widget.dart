@@ -14,8 +14,6 @@ class GradingComponentTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String gpa = '';
-
     return SpacedColumn(
       spacing: 10,
       crossAxisAlignment: CrossAxisAlignment.stretch,

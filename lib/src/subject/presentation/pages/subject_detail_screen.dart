@@ -1,7 +1,5 @@
 import 'package:ease_studyante_app/core/bloc/bloc/global_bloc.dart';
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
-import 'package:ease_studyante_app/core/local_storage/local_storage.dart';
-
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
 import 'package:ease_studyante_app/core/common_widget/gpa_tile_widget.dart';
 import 'package:ease_studyante_app/src/assessment/domain/assessment_model.dart';
