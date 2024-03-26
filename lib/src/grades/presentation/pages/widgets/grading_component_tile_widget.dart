@@ -1,6 +1,7 @@
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
 import 'package:ease_studyante_app/core/common_widget/spaced_row_widget.dart';
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
+import 'package:ease_studyante_app/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 
 class GradingComponentTileWidget extends StatelessWidget {
@@ -21,7 +22,7 @@ class GradingComponentTileWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
-            color: ColorSchemes.red,
+            color: ColorName.primary,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey,

@@ -1,23 +1,31 @@
 import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart';
 import 'package:ease_studyante_app/core/common_widget/spaced_row_widget.dart';
+import 'package:ease_studyante_app/src/attendance/domain/models/student_attendance_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AttendanceItemWidget extends StatelessWidget {
-  final String name;
-  final DateTime date;
-  final String status;
+  final StudentAttendanceModel studentAttendance;
   const AttendanceItemWidget({
     super.key,
-    required this.name,
-    required this.date,
-    required this.status,
+    required this.studentAttendance,
   });
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = DateFormat.yMMMMd('en_US').format(date);
-    final formattedTime = DateFormat.Hms().format(date);
+    final formattedDate = DateFormat.yMMMMd('en_US').format(
+      DateTime.parse(
+        studentAttendance.timeIn,
+      ),
+    );
+    final formattedTime = DateFormat.Hms().format(
+      DateTime.parse(
+        studentAttendance.timeIn,
+      ),
+    );
+    final status = studentAttendance.isPresent ? 'Present' : 'Tardy';
+    final statusColor =
+        status != 'Present' ? Colors.red[400] : Colors.green[400];
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -42,7 +50,7 @@ class AttendanceItemWidget extends StatelessWidget {
           SpacedRow(
             children: [
               Text(
-                name,
+                studentAttendance.student.user.fullName,
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const Spacer(),
@@ -57,12 +65,24 @@ class AttendanceItemWidget extends StatelessWidget {
           ),
           SpacedRow(
             children: [
-              Text(
-                'Status: $status',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                ),
+              Row(
+                children: [
+                  const Text(
+                    'Status: ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    status,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: statusColor,
+                    ),
+                  ),
+                ],
               ),
               const Spacer(),
               Text(

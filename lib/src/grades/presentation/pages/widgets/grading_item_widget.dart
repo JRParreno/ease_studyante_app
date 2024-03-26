@@ -2,6 +2,7 @@ import 'package:ease_studyante_app/core/common_widget/spaced_column_widget.dart'
 import 'package:ease_studyante_app/core/common_widget/spaced_row_widget.dart';
 import 'package:ease_studyante_app/core/extensions/string_extension.dart';
 import 'package:ease_studyante_app/core/resources/theme/theme.dart';
+import 'package:ease_studyante_app/gen/colors.gen.dart';
 import 'package:ease_studyante_app/src/assessment/domain/assessment_model.dart';
 import 'package:ease_studyante_app/src/grades/presentation/pages/grading_detail_screen.dart';
 import 'package:ease_studyante_app/src/subject/domain/entities/subject_model.dart';
@@ -52,7 +53,7 @@ class GradingItemWidget extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
-              color: ColorSchemes.red,
+              color: ColorName.primary,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey,
