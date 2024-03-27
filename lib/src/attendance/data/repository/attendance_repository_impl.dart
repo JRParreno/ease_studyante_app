@@ -6,8 +6,10 @@ import 'package:ease_studyante_app/src/attendance/domain/models/student_attendan
 
 class AttendanceRepositoryImpl extends AttendanceRepository {
   @override
-  Future<List<StudentAttendanceModel>> getStudentAttendance() async {
-    String url = '${AppConstant.apiUrl}/student/attendance';
+  Future<List<StudentAttendanceModel>> getStudentAttendance(
+      String subjectId) async {
+    String url =
+        '${AppConstant.apiUrl}/student/attendance?subject_id=$subjectId';
 
     return await ApiInterceptor.apiInstance().get(url).then((value) {
       final result = value.data['results'] as List;
