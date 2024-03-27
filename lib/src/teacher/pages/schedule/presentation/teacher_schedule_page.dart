@@ -1,4 +1,4 @@
-import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/section.dart';
+import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/teacher_schedule.dart';
 import 'package:ease_studyante_app/src/teacher/pages/schedule/presentation/bloc/teacher_schedule_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/pages/schedule/presentation/widgets/teacher_schedule_list.dart';
 import 'package:ease_studyante_app/src/teacher/pages/schedule/presentation/widgets/teacher_schedule_list_loading.dart';
@@ -41,7 +41,7 @@ class _TeacherSchedulePageState extends State<TeacherSchedulePage> {
                 if (state is TeacherScheduleLoaded) {
                   return TeacherScheduleList(
                     isPaginate: state.isPaginate,
-                    onTap: (schedule) => handleOnTapSchedule(schedule.section),
+                    onTap: (schedule) => handleOnTapSchedule(schedule),
                     schedules: state.teacherScheduleModel.schedules,
                     controller: scrollController,
                   );
@@ -66,10 +66,11 @@ class _TeacherSchedulePageState extends State<TeacherSchedulePage> {
     });
   }
 
-  void handleOnTapSchedule(Section section) {
+  void handleOnTapSchedule(TeacherSchedule teacherSchedule) {
     Navigator.of(context).pushNamed(StudentListPage.routeName,
         arguments: StudentListArgs(
-            section: section,
-            appbarTitle: '${section.yearLevel} - ${section.name}'));
+            schedule: teacherSchedule,
+            appbarTitle:
+                '${teacherSchedule.section.yearLevel} - ${teacherSchedule.section.name}'));
   }
 }

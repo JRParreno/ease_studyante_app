@@ -7,7 +7,7 @@ import 'package:ease_studyante_app/src/teacher/pages/qr_code/domain/repositories
 class QRRepositoryImpl extends QRRepository {
   @override
   Future<QrCodeResponseModel> qrScanStudent(String id) async {
-    const String url = '${AppConstant.apiUrl}/teacher/students/attendance/';
+    const String url = '${AppConstant.apiUrl}/qr_code/';
 
     final data = {"student": id};
 

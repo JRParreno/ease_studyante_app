@@ -1,5 +1,5 @@
-import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/section.dart';
 import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/student.dart';
+import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/teacher_schedule.dart';
 import 'package:ease_studyante_app/src/teacher/pages/student/presentation/student_detail.dart';
 import 'package:ease_studyante_app/src/teacher/pages/student/presentation/widgets/student_card.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +10,13 @@ class StudentListView extends StatelessWidget {
     required this.scrollController,
     required this.isPaginate,
     required this.students,
-    required this.section,
+    required this.schedule,
   });
 
   final ScrollController scrollController;
   final bool isPaginate;
   final List<Student> students;
-  final Section section;
+  final TeacherSchedule schedule;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class StudentListView extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(
               StudentDetailPage.routeName,
-              arguments: StudentDetailArgs(section: section, student: item),
+              arguments: StudentDetailArgs(schedule: schedule, student: item),
             );
           },
         );

@@ -16,4 +16,12 @@ class DepartmentModel {
       code: map['code'] as String,
     );
   }
+
+  factory DepartmentModel.empty() {
+    return DepartmentModel(
+      id: -1,
+      name: '',
+      code: '',
+    );
+  }
 }
