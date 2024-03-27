@@ -1,15 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:ease_studyante_app/core/config/app_constant.dart';
 import 'package:ease_studyante_app/core/interceptor/api_interceptor.dart';
-import 'package:ease_studyante_app/src/attendance/data/repository/attendance_repository.dart';
 import 'package:ease_studyante_app/src/attendance/domain/models/student_attendance_model.dart';
+import 'package:ease_studyante_app/src/teacher/pages/attendance/data/repository/teacher_attendance_repository.dart';
 
-class AttendanceRepositoryImpl extends AttendanceRepository {
+class TeacherAttendanceRepositoryImpl extends TeacherAttendanceRepository {
   @override
-  Future<List<StudentAttendanceModel>> getStudentAttendance(
-      String subjectId) async {
+  Future<List<StudentAttendanceModel>> getStudentAttendance({
+    required String studentId,
+    required String subjectId,
+  }) async {
     String url =
-        '${AppConstant.apiUrl}/student/attendance?subject_id=$subjectId';
+        '${AppConstant.apiUrl}/teacher/students/attendance?student_id=$studentId&subject_id=$subjectId';
 
     return await ApiInterceptor.apiInstance().get(url).then((value) {
       final result = value.data['results'] as List;

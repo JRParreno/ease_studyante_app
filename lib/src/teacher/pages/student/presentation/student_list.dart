@@ -1,6 +1,6 @@
 import 'package:ease_studyante_app/core/common_widget/custom_appbar.dart';
 import 'package:ease_studyante_app/core/common_widget/custom_text.dart';
-import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/section.dart';
+import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/teacher_schedule.dart';
 import 'package:ease_studyante_app/src/teacher/pages/student/data/data_sources/student_list_repository_impl.dart';
 import 'package:ease_studyante_app/src/teacher/pages/student/presentation/bloc/student_list_bloc.dart';
 import 'package:ease_studyante_app/src/teacher/pages/student/presentation/widgets/student_list_view.dart';
@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StudentListArgs {
-  final Section section;
+  final TeacherSchedule schedule;
   final String appbarTitle;
 
   StudentListArgs({
-    required this.section,
+    required this.schedule,
     required this.appbarTitle,
   });
 }
@@ -41,7 +41,8 @@ class _StudentListPageState extends State<StudentListPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => studentListBloc
-        ..add(OnGetTeacherStudentList(section: widget.args.section.id)),
+        ..add(
+            OnGetTeacherStudentList(section: widget.args.schedule.section.id)),
       child: Scaffold(
         appBar: buildAppBar(context: context, title: widget.args.appbarTitle),
         body: BlocBuilder<StudentListBloc, StudentListState>(
@@ -56,7 +57,7 @@ class _StudentListPageState extends State<StudentListPage> {
                 scrollController: scrollController,
                 isPaginate: state.isPaginate,
                 students: state.studentList.students,
-                section: widget.args.section,
+                schedule: widget.args.schedule,
               );
             }
             return const Center(
@@ -72,8 +73,9 @@ class _StudentListPageState extends State<StudentListPage> {
     scrollController.addListener(() {
       if (scrollController.position.pixels >
           (scrollController.position.pixels * 0.75)) {
-        BlocProvider.of<StudentListBloc>(context)
-            .add(OnPaginateTeacherStudentList(section: widget.args.section.id));
+        BlocProvider.of<StudentListBloc>(context).add(
+            OnPaginateTeacherStudentList(
+                section: widget.args.schedule.section.id));
       }
     });
   }

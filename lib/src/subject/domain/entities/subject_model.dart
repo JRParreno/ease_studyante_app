@@ -35,4 +35,17 @@ class SubjectModel {
       quarteryAssessment: map['quartery_assessment'] as int,
     );
   }
+
+  factory SubjectModel.empty() {
+    return SubjectModel(
+      code: '',
+      department: DepartmentModel.empty(),
+      id: '',
+      name: '',
+      performanceTask: -1,
+      quarteryAssessment: -1,
+      writtenWork: -1,
+      yearLevel: '',
+    );
+  }
 }

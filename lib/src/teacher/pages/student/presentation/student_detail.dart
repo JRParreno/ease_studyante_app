@@ -1,17 +1,25 @@
 import 'package:ease_studyante_app/core/common_widget/common_widget.dart';
 import 'package:ease_studyante_app/core/common_widget/custom_appbar.dart';
 import 'package:ease_studyante_app/gen/colors.gen.dart';
+import 'package:ease_studyante_app/src/teacher/pages/attendance/data/repository/teacher_attendance_repository_impl.dart';
+import 'package:ease_studyante_app/src/teacher/pages/attendance/presentation/blocs/bloc/teacher_attendance_bloc.dart';
+import 'package:ease_studyante_app/src/teacher/pages/attendance/presentation/pages/attendance_screen.dart';
 import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/section.dart';
 import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/student.dart';
+import 'package:ease_studyante_app/src/teacher/pages/home/domain/entities/teacher_schedule.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../../attendance/data/repository/teacher_attendance_repository.dart';
 
 class StudentDetailArgs {
-  final Section section;
+  final TeacherSchedule schedule;
   final Student student;
 
   StudentDetailArgs({
-    required this.section,
+    required this.schedule,
     required this.student,
   });
 }
@@ -34,7 +42,7 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
   void initState() {
     super.initState();
     student = widget.args.student;
-    section = widget.args.section;
+    section = widget.args.schedule.section;
   }
 
   @override
@@ -131,7 +139,30 @@ class _StudentDetailPageState extends State<StudentDetailPage> {
                     children: [
                       CustomBtn(
                         label: 'View Attendance',
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              duration: const Duration(milliseconds: 250),
+                              type: PageTransitionType.fade,
+                              child: RepositoryProvider<
+                                  TeacherAttendanceRepository>(
+                                create: (context) =>
+                                    TeacherAttendanceRepositoryImpl(),
+                                child: BlocProvider<TeacherAttendanceBloc>(
+                                  create: (context) => TeacherAttendanceBloc(
+                                    attendanceRepository: RepositoryProvider.of<
+                                        TeacherAttendanceRepository>(context),
+                                  ),
+                                  child: TeacherAttendanceScreen(
+                                    subject: widget.args.schedule.subject,
+                                    student: student,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       const Gap(10),
                       CustomBtn(
